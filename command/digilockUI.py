@@ -1,5 +1,6 @@
 import telnetlib
 from typing import List
+import numpy as np
 
 class DigilockUI:
     def __init__(self, host: str, port: int):
@@ -27,3 +28,12 @@ class DigilockUI:
     def query_bool(self, command: str) -> bool:
         line = self.query_lines(command)
         return line[0].strip().lower() == "true"
+
+    def query_graph(self, command: str) -> np.ndarray:
+        lines = self.query_lines(command)
+        nums = lines[0].split()
+        data = np.ndarray((len(lines), len(nums)))
+        for count, line in enumerate(lines):
+            line_num = np.fromstring(line, sep=' ')
+            data[count] = line_num
+        return data
