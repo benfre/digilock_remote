@@ -116,7 +116,7 @@ class DigilockUI:
         
         if com:
             if com.type == Command_type.Numeric:
-                self.tn.write((com.name+"={}".format(value=value)).encode('ascii')+b"\n")
+                self.tn.write((com.name+"={}".format(value)).encode('ascii')+b"\n")
                 self.tn.read_until(b"> ", timeout=1)
         else:
             self.tn.write((command+"={}".format(value)).encode('ascii')+b"\n")
@@ -145,7 +145,7 @@ class DigilockUI:
         
         value = "{}".format(item.value)
         if com:
-            if com.type == Command_type.Enum and isinstance(item, com.enum_type)
+            if com.type == Command_type.Enum and isinstance(item, com.enum_type):
                 self.tn.write((com.name+"="+value).encode('ascii')+b"\n")
                 self.tn.read_until(b"> ", timeout=1)
         else:
