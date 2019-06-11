@@ -1,5 +1,8 @@
 from enum import Enum
 
+class StrEnum(Enum):
+    def __str__(self):
+        return self.value
 
 class Command_type(Enum):
     Enum = 1
@@ -8,21 +11,21 @@ class Command_type(Enum):
     Array = 4
     Graph = 5
 
-class Access_control_enum(Enum):
+class Access_control_enum(StrEnum):
     pass
 
-class Analog_tab_enum(Enum):
+class Analog_tab_enum(StrEnum):
     General = 'General'
 
-class Autolock_display_active_trace_enum(Enum):
+class Autolock_display_active_trace_enum(StrEnum):
     Spectrum = 'Spectrum'
     Input = 'Input'
 
-class Autolock_display_channel(Enum):
+class Autolock_display_channel(StrEnum):
     Main_in = 'Main in'
     Aux_in = 'Aux in'
 
-class Pid_output_enum(Enum):
+class Pid_output_enum(StrEnum):
     Main_out ='Main out'
     Aux_out ='Aux out'
     SC110_out ='SC110 out'
@@ -46,12 +49,4 @@ digilockUI_commands = [
     Command(name='autolock:display:graph', command_type=Command_type.Graph, enum_type= None,queryable=True, settable=False),
     Command(name='autolock:display:ch1:channel', command_type=Command_type.Enum, enum_type= Autolock_display_channel,queryable=True, settable=True),
     Command(name='pid2:output', command_type=Command_type.Enum, enum_type= Pid_output_enum,queryable=True, settable=True)
-    #{'name':'access control', 'type':command_type.Enum, 'enum_type': access_control_enum,'queryable':False, 'settable':True},
-    #{'name':'analog:lock:enable', 'type':Command_type.Bool, 'enum_type': None,'queryable':True, 'settable':True},
-    #{'name':'analog:proportional', 'type':Command_type.Numeric, 'enum_type': None,'queryable':True, 'settable':True},
-    #{'name':'analog:tab', 'type':Command_type.Enum, 'enum_type': Analog_tab_enum,'queryable':True, 'settable':True},
-    #{'name':'autolock:display:graph', 'type':Command_type.Graph, 'enum_type': None,'queryable':True, 'settable':False},
-    #{'name':'commandlist', 'type':Command_type.Array, 'enum_type': None,'queryable':True, 'settable':False},
-    #{'name':'autolock:display:ch1:channel', 'type':Command_type.Enum, 'enum_type': Autolock_display_channel,'queryable':True, 'settable':True},
-    #{'name':'pid2:output', 'type':Command_type.Enum, 'enum_type': Pid_output_enum,'queryable':True, 'settable':True}
 ]

@@ -15,7 +15,7 @@ print(pid1_gain)
 
 dui.set_enum("pid2:output",Pid_output_enum.DCC_Iset)
 
-print(dui.query_enum("pid2:output.range?"))
+print(dui.query_range("pid2:output"))
 print(dui.query_enum("pid2:output"))
 
 dui.set_bool("pid2:limit:enable",True)
@@ -28,7 +28,6 @@ autolock_relock_enable = dui.query_bool("autolock:relock:enable")
 print(autolock_relock_enable)
 
 graph1 = dui.query_graph("autolock:display:graph")
-print(graph1[0])
 print(graph1.shape)
 
 figsize = (10, 8)
