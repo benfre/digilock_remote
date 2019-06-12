@@ -1,5 +1,5 @@
-from digilock_UI import Digilock_UI
-from command import Command_type
+from digilock_remote import Digilock_UI
+from digilock_remote import Command_type
 import matplotlib.pyplot as plt
 
 dui = Digilock_UI("10.9.114.193", 60001)

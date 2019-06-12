@@ -1,7 +1,7 @@
-from digilock_UI import Digilock_UI
+from digilock_remote import Digilock_UI
 import matplotlib.pyplot as plt
 
-from command import *
+from digilock_remote import Pid_output_enum
 
 dui = Digilock_UI("10.9.114.193", 60001)
 
