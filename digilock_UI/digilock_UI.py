@@ -3,9 +3,9 @@ from typing import List, Dict, Union
 import numpy as np
 from enum import Enum
 
-from commandlist import Command, digilockUI_commands, Command_type
+from command import Command, digilockUI_commands, Command_type
 
-class DigilockUI:
+class Digilock_UI:
     def __init__(self, host: str, port: int, commandset:List[Command] = None):
         self.host = host
         self.port = port
@@ -108,6 +108,10 @@ class DigilockUI:
         
         return np.ndarray((0,0))
 
+    def send_comand(self, command: str) -> None :
+        self.tn.write(command.encode('ascii')+b"\n")
+        self.tn.read_until(b"> ", timeout=1)
+
     def set_numeric(self, command: Union[str, Command], value: float) -> None:
         if isinstance(command, Command):
             com = command
@@ -116,11 +120,9 @@ class DigilockUI:
         
         if com:
             if com.type == Command_type.Numeric:
-                self.tn.write((com.name+"={}".format(value)).encode('ascii')+b"\n")
-                self.tn.read_until(b"> ", timeout=1)
+                self.send_comand(com.name+"={}".format(value))
         else:
-            self.tn.write((command+"={}".format(value)).encode('ascii')+b"\n")
-            self.tn.read_until(b"> ", timeout=1)
+            self.send_comand(command+"={}".format(value))
     
     def set_bool(self, command: Union[str, Command], value: bool) -> None:
         if isinstance(command, Command):
@@ -131,11 +133,9 @@ class DigilockUI:
         tf = "{}".format(value).lower()
         if com:
             if com.type == Command_type.Bool:
-                self.tn.write((com.name+"="+tf).encode('ascii')+b"\n")
-                self.tn.read_until(b"> ", timeout=1)
+                self.send_comand(com.name+"="+tf)
         else:
-            self.tn.write((command+"="+tf).encode('ascii')+b"\n")
-            self.tn.read_until(b"> ", timeout=1)
+            self.send_comand(command+"="+tf)
 
     def set_enum(self, command: str, item: Enum) -> None:
         if isinstance(command, Command):
@@ -146,9 +146,7 @@ class DigilockUI:
         value = "{}".format(item.value)
         if com:
             if com.type == Command_type.Enum and isinstance(item, com.enum_type):
-                self.tn.write((com.name+"="+value).encode('ascii')+b"\n")
-                self.tn.read_until(b"> ", timeout=1)
+                self.send_comand(com.name+"="+value)
         else:
-            self.tn.write((command+"="+value).encode('ascii')+b"\n")
-            self.tn.read_until(b"> ", timeout=1)
+            self.send_comand(command+"="+value)
         

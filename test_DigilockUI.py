@@ -1,9 +1,9 @@
-import digilockUI
+from digilock_UI import Digilock_UI
 import matplotlib.pyplot as plt
 
-from commandlist import *
+from command import *
 
-dui = digilockUI.DigilockUI("10.9.114.193", 60001)
+dui = Digilock_UI("10.9.114.193", 60001)
 
 analogP = 0.0
 dui.set_numeric("analog:proportional", analogP)

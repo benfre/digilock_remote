@@ -1,8 +1,8 @@
-import digilockUI
-from commandlist import digilockUI_commands, Command_type
+from digilock_UI import Digilock_UI
+from command import Command_type
 import matplotlib.pyplot as plt
 
-dui = digilockUI.DigilockUI("10.9.114.193", 60001)
+dui = Digilock_UI("10.9.114.193", 60001)
 
 for command in dui.commandset:
     if command.settable:
